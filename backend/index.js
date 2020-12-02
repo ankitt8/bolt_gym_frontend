@@ -38,7 +38,7 @@ AWS.config.update({
 // Creating a new instance of S3:
 const s3 = new AWS.S3();
 
-app.post('/in_time', (req, res) => {
+app.post('/api/in_time', (req, res) => {
   const { userId } = req.body;
   console.log(userId)
   User.findById(userId, (err, doc) => {
@@ -59,7 +59,7 @@ app.post('/in_time', (req, res) => {
     }
   });
 });
-app.post('/out_time', (req, res) => {
+app.post('/api/out_time', (req, res) => {
   const { userId } = req.body;
   User.findById(userId, (err, doc) => {
     if (err) {
@@ -77,7 +77,7 @@ app.post('/out_time', (req, res) => {
   });
 });
 
-app.get('/testing', (req, res) => {
+app.get('/api/testing', (req, res) => {
   User.findById('5fb804b1fb6cdb38ec3f521e', (err, doc) => {
     if (err) {
       console.log('Error');
@@ -103,7 +103,7 @@ app.get('/testing', (req, res) => {
 });
 
 // POST method to register a new entry
-app.post('/add_user', (req, res) => {
+app.post('/api/add_user', (req, res) => {
   const user = new User(req.body);
   console.log(req.body);
   user.save()
@@ -117,7 +117,7 @@ app.post('/add_user', (req, res) => {
 });
 
 // POST method to get user detials to shown on home page
-app.get('/get_users', (req, res) => {
+app.get('/api/get_users', (req, res) => {
   User.find({}, (err, result) => {
     if (err) {
       res.status(400).send('Something went wroing');
@@ -128,14 +128,14 @@ app.get('/get_users', (req, res) => {
 });
 
 // POST method route for uploading file
-app.post('/post-file', upload.single('demo_file'), (req, res) => {
+app.post('/api/post-file', upload.single('demo_file'), (req, res) => {
   // Multer middleware adds file(in case of single file ) or files(multiple files) object to the request object.
   // req.file is the demo_file
   uploadFile(req.file.path, req.file.filename, res);
 });
 
 // GET method route for downloading/retrieving file
-app.get('/get-file/:file_name', (req, res) => {
+app.get('/api/get-file/:file_name', (req, res) => {
   retrieveFile(req.params.file_name, res);
 });
 

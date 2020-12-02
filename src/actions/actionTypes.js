@@ -1,0 +1,8 @@
+export const ADDUSER = 'ADDUSER';
+export const ADD_USER_STATUS = 'ADD_USER_STATUS';
+export const GETUSERS = 'GETUSERS';
+export const GET_USERS_STATUS = 'GET_USERS_STATUS';
+export const NEW_USER_ADDED = 'NEW_USER_ADDED';
+export const UPDATE_IN_TIME = 'UPDATE_IN_TIME';
+export const UPDATE_OUT_TIME = 'UPDATE_OUT_TIME';
+export const INCREMENT_DAILY_COUNT = 'INCREMENT_DAILY_COUNT';

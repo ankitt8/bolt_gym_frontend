@@ -6,8 +6,8 @@ const UserSchema = new mongoose.Schema({
     emailId: {
         type: String
     },
-    batch: {
-        type: String
+    mobileNo: {
+        type : Number
     },
     feesRemaining: {
         type: Number,

@@ -1,10 +1,11 @@
 /* eslint-disable dot-notation */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import UserCard from '../containers/UserCard';
-import DailyCount from '../containers/DailyCount';
+import { useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import UserCard from './UserCard';
 import AddUserSuccessMsg from './AddUserSuccessMsg';
-
 // function sortUsersByName() {
 //   // Declare variables
 //   const input = document.getElementById('myInput');
@@ -24,19 +25,42 @@ import AddUserSuccessMsg from './AddUserSuccessMsg';
 //     }
 //   }
 // }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+
+    },
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
 export default function HomePage({ getUsers, users, newUserAdded }) {
+  const classes = useStyles();
+  const getUsersStatus = useSelector((state) => state.users.getUsersStatus);
   useEffect(() => {
     getUsers();
   }, [getUsers]);
-
+  if (getUsersStatus.failed === true) {
+    return (<div>Check Your InterNet connectivity!</div>);
+  }
+  if (getUsersStatus.successful !== true) {
+    return (
+      <div className={classes.root}>
+        <CircularProgress />
+      </div>
+    );
+  }
   const renderedUsersList = users.map((user) => (
     // eslint-disable-next-line dot-notation
-    <UserCard user={user} />
+    <UserCard id={user.id} name={user.name} inTime={user.inTime} outTime={user.outTime} />
   ));
 
   return (
     <>
-      <DailyCount />
+      {/* <DailyCount /> */}
       <ul className="userList">
         {renderedUsersList}
       </ul>

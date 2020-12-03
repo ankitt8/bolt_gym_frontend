@@ -26,6 +26,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: '100px',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -143,8 +144,8 @@ export default function Header() {
   const container = window !== undefined ? () => window.document.body : undefined;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="fixed">
+        <Toolbar style={{ height: '80px' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"

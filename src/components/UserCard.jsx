@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
@@ -52,14 +52,34 @@ const useStyles = makeStyles((theme) => ({
 export default function UserCard({
   id, name, inTime = null, outTime = null,
 }) {
-  // const [inTime, inTimeClicked] = setState(false);
-  // const [outTime, outTimeClicked] = setState(false);
+  // console.log(intime);
+  const [inTimeState, inTimeClicked] = useState(inTime);
+  const [outTimeState, outTimeClicked] = useState(outTime);
+  useEffect(() => {
+    inTimeClicked(inTime);
+    outTimeClicked(outTime);
+  }, [inTime, outTime]);
+  // const updatedInTime
+  let isDisabled = true;
+  if (inTimeState) {
+    isDisabled = false;
+  }
   const dispatch = useDispatch();
   function handleInTimeClick() {
+    const dateInTime = new Date();
+    const hour = dateInTime.getHours();
+    const min = dateInTime.getMinutes();
+    inTimeClicked(`${hour}:${min}`);
     dispatch(updateINTime(id));
+    // dispatch(getUsers());
   }
   function handleOutTimeClick() {
+    const dateInTime = new Date();
+    const hour = dateInTime.getHours();
+    const min = dateInTime.getMinutes();
+    outTimeClicked(`${hour}:${min}`);
     dispatch(updateOUTTime(id));
+    // dispatch(getUsers());
   }
   const classes = useStyles();
   return (
@@ -78,10 +98,10 @@ export default function UserCard({
 
         </CardContent>
         <div className={classes.button}>
-          {inTime
+          {inTimeState
             ? (
               <Typography style={{ display: 'inline' }} className={classes.title} variant="h5" noWrap>
-                {inTime}
+                {inTimeState}
               </Typography>
             )
             : (
@@ -94,10 +114,10 @@ export default function UserCard({
                 IN
               </Button>
             )}
-          {outTime
+          {outTimeState
             ? (
               <Typography style={{ display: 'inline' }} className={classes.title} variant="h5" noWrap>
-                {outTime}
+                {outTimeState}
               </Typography>
             )
             : (
@@ -105,6 +125,7 @@ export default function UserCard({
                 variant="outlined"
                 onClick={() => handleOutTimeClick(id)}
                 startIcon={<ArrowForwardIcon />}
+                disabled={isDisabled}
               >
                 OUT
               </Button>

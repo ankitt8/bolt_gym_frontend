@@ -4,6 +4,8 @@ import {
   GET_USERS_STATUS,
   NEW_USER_ADDED,
   INCREMENT_DAILY_COUNT,
+  UPDATE_IN_TIME,
+  UPDATE_OUT_TIME,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -20,6 +22,8 @@ const initialState = {
   },
   newUserAdded: false,
   dailyCount: 0,
+  inTime: null,
+  outTime: null,
 };
 const users = (state = initialState, action) => {
   switch (action.type) {
@@ -52,6 +56,18 @@ const users = (state = initialState, action) => {
       return {
         ...state,
         dailyCount: state.dailyCount + 1,
+      };
+    }
+    case UPDATE_IN_TIME: {
+      return {
+        ...state,
+        inTime: action.inTime,
+      };
+    }
+    case UPDATE_OUT_TIME: {
+      return {
+        ...state,
+        outTime: action.outTime,
       };
     }
     default: {

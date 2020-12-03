@@ -9,8 +9,8 @@ export default () => {
   const dispatch = useDispatch();
   const addUser = (user) => {
     dispatch(addUserToDatabase(user));
-    dispatch(getUsers());
     history.push('/');
+    dispatch(getUsers());
   };
   return <AddUser addUser={addUser} />;
 };

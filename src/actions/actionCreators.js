@@ -33,16 +33,16 @@ export function createNewUserAddedAction(newUserAdded) {
     newUserAdded,
   };
 }
-export function createINTimeAction(userId) {
+export function createINTimeAction(inTime) {
   return {
     type: UPDATE_IN_TIME,
-    userId,
+    inTime,
   };
 }
-export function createOUTTimeAction(userId) {
+export function createOUTTimeAction(userId, time) {
   return {
     type: UPDATE_OUT_TIME,
-    userId,
+    time,
   };
 }
 export function createIncrementDailyCountAction() {

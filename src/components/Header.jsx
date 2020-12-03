@@ -2,11 +2,12 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
+// import Typography from '@material-ui/core/Typography';
+// import Button from '@material-ui/core/Button';
+// import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 // imports for implementing drawer
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -18,6 +19,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import FeaturedVideoIcon from '@material-ui/icons/FeaturedVideo';
 import HomeIcon from '@material-ui/icons/Home';
+import { Typography } from '@material-ui/core';
+import BrandImg from '../static/images/brand.png';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -86,6 +89,15 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  image: {
+    height: '50px',
+    width: '50px',
+    display: 'inline-block',
+  },
+  alignBrand: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 }));
 
 export default function Header() {
@@ -142,10 +154,14 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
-          <div className={classes.search}>
+          <div className={classes.alignBrand}>
+            <img className={classes.image} src={BrandImg} alt="" />
+            <Typography style={{ display: 'inline' }} variant="h4">
+              BOLT GYM
+            </Typography>
+            <img className={classes.image} src={BrandImg} alt="" />
+          </div>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -157,7 +173,8 @@ export default function Header() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
+
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

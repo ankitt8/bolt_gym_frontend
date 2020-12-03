@@ -80,7 +80,7 @@ export default function UserCard({
         <div className={classes.button}>
           {inTime
             ? (
-              <Typography style={{ display: 'inline-block' }} className={classes.title} variant="h5" noWrap>
+              <Typography style={{ display: 'inline' }} className={classes.title} variant="h5" noWrap>
                 {inTime}
               </Typography>
             )
@@ -96,7 +96,7 @@ export default function UserCard({
             )}
           {outTime
             ? (
-              <Typography style={{ display: 'inline-block' }} className={classes.title} variant="h5" noWrap>
+              <Typography style={{ display: 'inline' }} className={classes.title} variant="h5" noWrap>
                 {outTime}
               </Typography>
             )

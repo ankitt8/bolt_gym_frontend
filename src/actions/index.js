@@ -11,11 +11,12 @@ import {
     createIncrementDailyCountAction,
 } from './actionCreators';
 
+const BASE_URI = 'https://bolt-backend.herokuapp.com';
 export function addUser(user) {
     return function (dispatch) {
         dispatch(createStatusAction({ type: ADD_USER_STATUS, started: true }));
         dispatch(createNewUserAddedAction(false));
-        fetch('http://localhost:8080/api/add_user', {
+        fetch(BASE_URI+'/api/add_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ export function getUsers() {
             type: GET_USERS_STATUS,
             started: true,
         }));
-        fetch('http://localhost:8080/api/get_users')
+        fetch(BASE_URI+'/api/get_users')
             .then((res) => res.json())
             .then((users) => {
                 dispatch(createStatusAction({
@@ -67,7 +68,7 @@ export function getUsers() {
 
 export function updateINTime(userId) {
     return function (dispatch) {
-        fetch('http://localhost:8080/api/in_time', {
+        fetch(BASE_URI+'/api/in_time', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ export function updateINTime(userId) {
 
 export function updateOUTTime(userId) {
     return function (dispatch) {
-        fetch('http://localhost:8080/api/out_time', {
+        fetch(BASE_URI+'/api/out_time', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

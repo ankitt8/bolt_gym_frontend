@@ -10,29 +10,23 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      // width: '25ch',
-      // margin: '0px',
-      marginRight: '0px',
+      width: '25ch',
     },
     display: 'flex',
     flexDirection: 'column',
   },
   paper: {
-    margin: '0px 10px 0px 10px',
+    margin: '80px 10px 0px 10px',
   },
   textField: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: '300px',
-      marginRight: '0px',
     },
   },
   button: {
     width: '300px',
-    height: '40px',
     marginRight: '200px',
-    display: 'flex',
-    justifyContent: 'flex-end',
   },
 }));
 export default function AddUserForm({ addUser }) {

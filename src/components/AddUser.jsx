@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      // width: '25ch',
+      // margin: '0px',
+      marginRight: '0px',
     },
     display: 'flex',
     flexDirection: 'column',
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: '300px',
+      marginRight: '0px',
     },
   },
   button: {

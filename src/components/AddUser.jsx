@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   paper: {
-    margin: '80px 10px 0px 10px',
+    margin: '0px 10px 0px 10px',
   },
   textField: {
     '& .MuiTextField-root': {
@@ -26,7 +26,10 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: '300px',
+    height: '40px',
     marginRight: '200px',
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 }));
 export default function AddUserForm({ addUser }) {

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import PropTypes from 'prop-types';
+import { addUser, getUsers } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,21 +31,30 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '200px',
   },
 }));
-export default function AddUserForm({ addUser }) {
+
+export default function AddUserForm() {
+  const classes = useStyles();
   const [name, setName] = useState('');
-  const [feesRemaining, setFeesRemaining] = useState(600);
+  const [amountDue, setamountDue] = useState(600);
   const [mobileNo, setMobileNo] = useState('');
   const [doj, handleDOJChange] = useState(new Date());
-  const classes = useStyles();
+  const [dueDate, handleDueDateChange] = useState(new Date());
+  const [dob, handleDOBChange] = useState(null);
+  const history = useHistory();
+  const dispatch = useDispatch();
   function handleFormSubmit(e) {
     e.preventDefault();
     const user = {
       name,
-      feesRemaining,
       mobileNo,
+      amountDue,
       doj,
+      dueDate,
+      dob,
     };
-    addUser(user);
+    dispatch(addUser(user));
+    history.push('/');
+    dispatch(getUsers());
   }
   return (
     <Paper className={classes.paper} elevation={3}>
@@ -89,19 +100,46 @@ export default function AddUserForm({ addUser }) {
             onChange={(date) => handleDOJChange(date)}
           />
         </div>
+        <div className={classes.textField}>
+          <KeyboardDatePicker
+            required
+            autoOk
+            variant="inline"
+            inputVariant="outlined"
+            label="DOB"
+            format="dd/MM/yyyy"
+            value={dob}
+            InputAdornmentProps={{ position: 'start' }}
+            onChange={(date) => handleDOBChange(date)}
+          />
+        </div>
 
         <div className={classes.textField}>
           <TextField
             required
             id="outlined-text"
-            label="Fees Remaining"
+            label="Amount Due"
             InputLabelProps={{
               shrink: true,
             }}
             variant="outlined"
-            onChange={(e) => setFeesRemaining(e.target.value)}
-            value={feesRemaining}
+            onChange={(e) => setamountDue(e.target.value)}
+            value={amountDue}
             type="number"
+          />
+        </div>
+
+        <div className={classes.textField}>
+          <KeyboardDatePicker
+            required
+            autoOk
+            variant="inline"
+            inputVariant="outlined"
+            label="Due Date"
+            format="dd/MM/yyyy"
+            value={dueDate}
+            InputAdornmentProps={{ position: 'start' }}
+            onChange={(date) => handleDueDateChange(date)}
           />
         </div>
         <div className={classes.button}>
@@ -117,6 +155,3 @@ export default function AddUserForm({ addUser }) {
     </Paper>
   );
 }
-AddUserForm.propTypes = {
-  addUser: PropTypes.func.isRequired,
-};

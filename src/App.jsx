@@ -4,7 +4,7 @@ import Header from './components/Header';
 import HomePage from './containers/HomePage';
 import AddFormLandingLoader from './components/AddFormLandingLoader';
 
-const AddUserForm = React.lazy(() => import('./containers/AddUser'));
+const AddUserForm = React.lazy(() => import('./components/AddUser'));
 function App() {
   return (
     <Suspense fallback={<AddFormLandingLoader />}>

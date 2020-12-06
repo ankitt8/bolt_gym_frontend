@@ -1,10 +1,10 @@
+/* eslint-disable dot-notation */
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import UserCard from './UserCard';
-import AddUserSuccessMsg from './AddUserSuccessMsg';
+import { getUsers } from '../actions';
+import UserDetailsCard from './UserDetailsCard';
 // function sortUsersByName() {
 //   // Declare variables
 //   const input = document.getElementById('myInput');
@@ -36,11 +36,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 }));
-export default function HomePage({ getUsers, users, newUserAdded }) {
+export default function UsersList() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const getUsersStatus = useSelector((state) => state.users.getUsersStatus);
+  const users = useSelector((state) => state.users.users);
   useEffect(() => {
-    getUsers();
+    dispatch(getUsers());
   }, [getUsers]);
   if (getUsersStatus.failed === true) {
     return (<div>Check Your InterNet connectivity!</div>);
@@ -52,10 +54,32 @@ export default function HomePage({ getUsers, users, newUserAdded }) {
       </div>
     );
   }
-  const renderedUsersList = users.map((user) => (
+  const renderedUsersList = users.map((user) => {
+    const dob = new Date(user.dob);
+    const dobString = new Date(dob.getTime() - (dob.getTimezoneOffset() * 60000))
+      .toISOString()
+      .split('T')[0];
+    const doj = new Date(user.doj);
+    const dojString = new Date(doj.getTime() - (doj.getTimezoneOffset() * 60000))
+      .toISOString()
+      .split('T')[0];
+    const dueDate = new Date(user.dueDate);
+    const dueDateString = new Date(dueDate.getTime() - (dueDate.getTimezoneOffset() * 60000))
+      .toISOString()
+      .split('T')[0];
     // eslint-disable-next-line dot-notation
-    <UserCard key={user.id} name={user.name} inTime={user.inTime} outTime={user.outTime} />
-  ));
+    return (
+      <UserDetailsCard
+        key={user['_id']}
+        name={user.name}
+        dob={dobString}
+        doj={dojString}
+        dueDate={dueDateString}
+        dueAmount={user.dueAmount}
+        attendance={user.attendance.length}
+      />
+    );
+  });
 
   return (
     <>
@@ -63,13 +87,6 @@ export default function HomePage({ getUsers, users, newUserAdded }) {
       <ul className="userList">
         {renderedUsersList}
       </ul>
-      {newUserAdded
-        && <AddUserSuccessMsg />}
     </>
   );
 }
-HomePage.propTypes = {
-  getUsers: PropTypes.func.isRequired,
-  users: PropTypes.instanceOf(Array).isRequired,
-  newUserAdded: PropTypes.bool.isRequired,
-};

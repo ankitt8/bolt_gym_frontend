@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,13 +17,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import FeaturedVideoIcon from '@material-ui/icons/FeaturedVideo';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
+import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
 import BrandImg from '../static/images/brand.png';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -118,27 +119,14 @@ export default function Header() {
           <ListItemText primary="Home" />
         </ListItem>
         <ListItem button key="Add User" onClick={() => { window.location.href = '/add_user'; }}>
-          <ListItemIcon><AddCircleIcon /></ListItemIcon>
+          <ListItemIcon><PersonAddRoundedIcon /></ListItemIcon>
           <ListItemText primary="Add User" />
         </ListItem>
-        <ListItem button key="Feature 1">
-          <ListItemIcon><FeaturedVideoIcon /></ListItemIcon>
-          <ListItemText primary="Feature 1" />
-        </ListItem>
-        <ListItem button key="Feature 2">
-          <ListItemIcon><FeaturedVideoIcon /></ListItemIcon>
-          <ListItemText primary="Feature 2" />
+        <ListItem button key="Users" onClick={() => { window.location.href = '/users'; }}>
+          <ListItemIcon><PeopleAltRoundedIcon /></ListItemIcon>
+          <ListItemText primary="Users" />
         </ListItem>
       </List>
-      {/* <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </div>
   );
   const container = window !== undefined ? () => window.document.body : undefined;

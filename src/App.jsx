@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
+import UsersList from './components/UsersList';
 import HomePage from './containers/HomePage';
 import AddFormLandingLoader from './components/AddFormLandingLoader';
 
@@ -12,6 +13,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route exact path="/users">
+          <UsersList />
         </Route>
         <Route exact path="/add_user">
           <AddUserForm />

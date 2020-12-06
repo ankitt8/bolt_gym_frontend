@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
     backgroundColor: grey,
     // border: '1px solid grey',
-    margin: '10px 5px',
+    margin: '30px 10px',
     padding: '10px',
   },
   details: {
@@ -137,7 +137,7 @@ export default function UserCard({
   );
 }
 UserCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   inTime: PropTypes.string,
   outTime: PropTypes.string,

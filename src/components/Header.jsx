@@ -118,13 +118,13 @@ export default function Header() {
           <ListItemIcon><HomeIcon /></ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button key="Add User" onClick={() => { window.location.href = '/add_user'; }}>
-          <ListItemIcon><PersonAddRoundedIcon /></ListItemIcon>
-          <ListItemText primary="Add User" />
-        </ListItem>
         <ListItem button key="Users" onClick={() => { window.location.href = '/users'; }}>
           <ListItemIcon><PeopleAltRoundedIcon /></ListItemIcon>
           <ListItemText primary="Users" />
+        </ListItem>
+        <ListItem button key="Add User" onClick={() => { window.location.href = '/add_user'; }}>
+          <ListItemIcon><PersonAddRoundedIcon /></ListItemIcon>
+          <ListItemText primary="Add User" />
         </ListItem>
       </List>
     </div>

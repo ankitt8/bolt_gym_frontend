@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   contentDiv: {
     display: 'flex',
     margin: '5px',
-    padding: '5px',
+    padding: '0px',
   },
   cover: {
     width: 100,

@@ -13,6 +13,7 @@ import {
 } from './actionCreators';
 
 const BASE_URI = 'https://bolt-backend.herokuapp.com';
+// const BASE_URI = 'http://localhost:8080';
 export function addUser(user) {
     return function (dispatch) {
         dispatch(createStatusAction({ type: ADD_USER_STATUS, started: true }));
@@ -80,21 +81,6 @@ export function updateINTime(userId) {
             .then((res) => res.json())
             .then((resJson) => {
                 console.log(resJson);
-                // const today = new Date();
-                // const dateInTime = new Date(resJson.inTime);
-                // console.log(dateInTime);
-                // let inTime = null;
-                // if (dateInTime.getDate() === today.getDate()
-                //     && dateInTime.getFullYear() === today.getFullYear()) {
-                //     const hour = dateInTime.getHours();
-                //     const min = dateInTime.getMinutes();
-                //     inTime = `${hour}:${min}`;
-                //     // console.log(user.name, inTime);
-                //     // todayCount += 1;
-                // }
-                // dispatch(createINTimeAction(inTime));
-                // dispatch(createGetUsersAction());
-                // dispatch(createIncrementDailyCountAction());
                 console.log(`In time for user ${userId} updated successfuly!`);
             })
             .catch(() => {

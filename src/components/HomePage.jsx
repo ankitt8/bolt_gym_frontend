@@ -54,7 +54,13 @@ export default function HomePage({ getUsers, users, newUserAdded }) {
   }
   const renderedUsersList = users.map((user) => (
     // eslint-disable-next-line dot-notation
-    <UserCard key={user.id} name={user.name} inTime={user.inTime} outTime={user.outTime} />
+    <UserCard
+      key={user.id}
+      id={user.id}
+      name={user.name}
+      inTime={user.inTime}
+      outTime={user.outTime}
+    />
   ));
 
   return (

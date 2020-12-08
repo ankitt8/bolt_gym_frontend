@@ -37,9 +37,10 @@ export default function AddUserForm() {
   const [name, setName] = useState('');
   const [amountDue, setamountDue] = useState(600);
   const [mobileNo, setMobileNo] = useState('');
-  const [doj, handleDOJChange] = useState(new Date());
-  const [dueDate, handleDueDateChange] = useState(new Date());
-  const [dob, handleDOBChange] = useState(null);
+  const [doj, setDOJ] = useState(new Date());
+  // eslint-disable-next-line max-len
+  const [dueDate, setdueDate] = useState(new Date((new Date()).setMonth((new Date()).getMonth() + 1)));
+  const [dob, setDOB] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
   function handleFormSubmit(e) {
@@ -97,7 +98,7 @@ export default function AddUserForm() {
             format="dd/MM/yyyy"
             value={doj}
             InputAdornmentProps={{ position: 'start' }}
-            onChange={(date) => handleDOJChange(date)}
+            onChange={(date) => setDOJ(date)}
           />
         </div>
         <div className={classes.textField}>
@@ -110,7 +111,7 @@ export default function AddUserForm() {
             format="dd/MM/yyyy"
             value={dob}
             InputAdornmentProps={{ position: 'start' }}
-            onChange={(date) => handleDOBChange(date)}
+            onChange={(date) => setDOB(date)}
           />
         </div>
 
@@ -139,7 +140,7 @@ export default function AddUserForm() {
             format="dd/MM/yyyy"
             value={dueDate}
             InputAdornmentProps={{ position: 'start' }}
-            onChange={(date) => handleDueDateChange(date)}
+            onChange={(date) => setdueDate(date)}
           />
         </div>
         <div className={classes.button}>

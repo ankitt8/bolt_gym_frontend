@@ -1,11 +1,12 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 import { grey } from '@material-ui/core/colors';
 // import profileImg from '../static/images/profi.png';
 
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UserDetailsCard({
-  name, dob, doj, dueAmount, dueDate, attendance,
+  id, name, dob, doj, dueAmount, dueDate, attendance,
 }) {
   // console.log(intime);
   const classes = useStyles();
@@ -113,21 +114,21 @@ export default function UserDetailsCard({
             </Typography>
           </div>
         </CardContent>
-        {/* <div className={classes.button}>
+        <Link to={`/edit_user?userId=${id}`}>
           <Button
             variant="outlined"
-            onClick={() => handleEditButtonClick(id)}
-            startIcon={<ArrowForwardIcon />}
+            // onClick={() => handleEditButtonClick(id)}
+            // startIcon={<ArrowForwardIcon />}
           >
             Edit
           </Button>
-        </div> */}
+        </Link>
       </div>
     </Card>
   );
 }
 UserDetailsCard.propTypes = {
-  // id: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string,
   dob: PropTypes.string,
   doj: PropTypes.string,

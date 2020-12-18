@@ -6,6 +6,7 @@ import HomePage from './containers/HomePage';
 import AddFormLandingLoader from './components/AddFormLandingLoader';
 
 const AddUserForm = React.lazy(() => import('./components/AddUser'));
+const EditUser = React.lazy(() => import('./components/EditUser'));
 function App() {
   return (
     <Suspense fallback={<AddFormLandingLoader />}>
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route exact path="/add_user">
           <AddUserForm />
+        </Route>
+        <Route exact path="/edit_user">
+          <EditUser />
         </Route>
       </Switch>
     </Suspense>

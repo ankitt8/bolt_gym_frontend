@@ -71,6 +71,7 @@ export default function UsersList() {
     return (
       <UserDetailsCard
         key={user['_id']}
+        id={user['_id']}
         name={user.name}
         dob={dobString}
         doj={dojString}

@@ -2,6 +2,7 @@
 import {
     ADD_USER_STATUS,
     GET_USERS_STATUS,
+    EDIT_USER_STATUS
 } from './actionTypes';
 import {
     createStatusAction,
@@ -63,6 +64,36 @@ export function getUsers() {
                 console.log(err);
                 dispatch(createStatusAction({
                     type: GET_USERS_STATUS,
+                    failed: true,
+                }));
+            });
+    };
+}
+
+export function editUser(userId, user) {
+    console.log('hi',userId)
+    return function (dispatch) {
+        dispatch(createStatusAction({ type: EDIT_USER_STATUS, started: true }));
+        // dispatch(createEditUserAction(false));
+        fetch(`${BASE_URI}/api/edit_user?userId=${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+            .then((res) => res.json())
+            .then(() => {
+                dispatch(createStatusAction({
+                    type: EDIT_USER_STATUS,
+                    successful: true,
+                }));
+                dispatch(getUsers());
+            })
+            .catch((err) => {
+                console.log(err);
+                dispatch(createStatusAction({
+                    type: EDIT_USER_STATUS,
                     failed: true,
                 }));
             });

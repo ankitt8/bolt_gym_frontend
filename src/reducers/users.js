@@ -6,6 +6,7 @@ import {
   INCREMENT_DAILY_COUNT,
   UPDATE_IN_TIME,
   UPDATE_OUT_TIME,
+  EDIT_USER_STATUS,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -16,6 +17,11 @@ const initialState = {
     failed: null,
   },
   getUsersStatus: {
+    started: null,
+    successful: null,
+    failed: null,
+  },
+  editUsersStatus: {
     started: null,
     successful: null,
     failed: null,
@@ -45,8 +51,14 @@ const users = (state = initialState, action) => {
         getUsersStatus: { ...action.status },
       };
     }
+    case EDIT_USER_STATUS: {
+      return {
+        ...state,
+        getUsersStatus: { ...action.status },
+      };
+    }
     case GETUSERS: {
-      const usersPayload = action.users;
+      const usersPayload = action.users.map((user) => ({ ...user }));
       return {
         ...state,
         users: usersPayload,

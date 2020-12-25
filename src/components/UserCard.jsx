@@ -83,7 +83,7 @@ export default function UserCard({
   }
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} data-name={name}>
       {/* <CardMedia
         className={classes.cover}
         image="../../public/profile.png"

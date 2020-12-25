@@ -143,7 +143,13 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <div className={classes.alignBrand}>
+          <div
+            className={classes.alignBrand}
+            role="button"
+            tabIndex="0"
+            onKeyPress={() => { window.location.href = '/'; }}
+            onClick={() => { window.location.href = '/'; }}
+          >
             <img className={classes.image} src={BrandImg} alt="" />
             <Typography style={{ display: 'inline' }} variant="h4">
               BOLT GYM

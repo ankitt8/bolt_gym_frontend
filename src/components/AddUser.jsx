@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import { addUser, getUsers } from '../actions';
+// import { addUser } from '../actions';
+import AddFormLandingLoader from './AddFormLandingLoader';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,24 @@ export default function AddUserForm() {
   const [dueDate, setdueDate] = useState(new Date((new Date()).setMonth((new Date()).getMonth() + 1)));
   const [dob, setDOB] = useState(null);
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [loadingState, setLoadingState] = useState(false);
+  async function addUserToDataBase(user) {
+    setLoadingState(true);
+    await fetch('https://bolt-backend.herokuapp.com/api/add_user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    setLoadingState(false);
+    // dispatch();
+    history.push({
+      pathname: '/',
+      newUserAdded: true,
+    });
+  }
   function handleFormSubmit(e) {
     e.preventDefault();
     const user = {
@@ -53,10 +71,12 @@ export default function AddUserForm() {
       dueDate,
       dob,
     };
-    dispatch(addUser(user));
-    history.push('/');
-    dispatch(getUsers());
+    addUserToDataBase(user);
+    // dispatch();
+    // history.push('/');
+    // dispatch(getUsers());
   }
+  if (loadingState === true) return <AddFormLandingLoader />;
   return (
     <Paper className={classes.paper} elevation={3}>
       <form className={classes.root} noValidate autoComplete="off" onSubmit={handleFormSubmit}>

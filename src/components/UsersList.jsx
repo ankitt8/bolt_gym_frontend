@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { getUsers } from '../actions';
 import UserDetailsCard from './UserDetailsCard';
+import SearchBar from './SearchBar';
 // function sortUsersByName() {
 //   // Declare variables
 //   const input = document.getElementById('myInput');
@@ -29,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     '& > * + *': {
       marginLeft: theme.spacing(2),
-
     },
     height: '100vh',
     justifyContent: 'center',
@@ -81,10 +81,10 @@ export default function UsersList() {
       />
     );
   });
-
   return (
     <>
       {/* <DailyCount /> */}
+      <SearchBar />
       <ul className="userList">
         {renderedUsersList}
       </ul>

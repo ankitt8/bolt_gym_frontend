@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import { editUser } from '../actions';
+// import { editUser } from '../actions';
 import AddFormLandingLoader from './AddFormLandingLoader';
 // import { SignalCellularNullSharp } from '@material-ui/icons';
 
@@ -46,8 +46,21 @@ export default function AddUserForm() {
   const [dueDate, setdueDate] = useState(null);
   const [dob, setDOB] = useState(null);
   const history = useHistory(null);
-  const dispatch = useDispatch();
-  const editUserStatus = useSelector((state) => state.users.editUserStatus);
+  // const dispatch = useDispatch();
+  // const editUserStatus = useSelector((state) => state.users.editUserStatus);
+  const [loadingState, setLoadingState] = useState(false);
+  async function editUserDatabase(user) {
+    setLoadingState(true);
+    await fetch(`https://bolt-backend.herokuapp.com/api/edit_user?userId=${userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    history.push('/users');
+    setLoadingState(false);
+  }
   function handleFormSubmit(e) {
     e.preventDefault();
     const user = {
@@ -58,13 +71,7 @@ export default function AddUserForm() {
       dueDate,
       dob,
     };
-    dispatch(editUser(userId, user));
-    // dispatch(getUsers());
-    // history.push('/users');
-    history.push('/users');
-    if (editUserStatus && editUserStatus.successful) {
-      // console.log('hi');
-    }
+    editUserDatabase(user);
   }
   async function getUserDetails() {
     // const res = await fetch(`http://localhost:8080/api/get_user/?userId=${userId}`);
@@ -83,7 +90,7 @@ export default function AddUserForm() {
     getUserDetails(userId);
   }, []);
   let componentToRender = null;
-  if (name === null) {
+  if (name === null || loadingState === true) {
     componentToRender = <AddFormLandingLoader />;
   } else {
     componentToRender = (

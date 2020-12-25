@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import UserCard from './UserCard';
 import AddUserSuccessMsg from './AddUserSuccessMsg';
+import SearchBar from './SearchBar';
 // function sortUsersByName() {
 //   // Declare variables
 //   const input = document.getElementById('myInput');
@@ -36,7 +37,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 }));
-export default function HomePage({ getUsers, users, newUserAdded }) {
+// function search(renderedUsersList) {
+//   console.log(renderedUsersList);
+// }
+export default function HomePage({ getUsers, users, ...rest }) {
+  // console.log(rest?.location?.newUserAdded);
+  // console.log(rest);
   const classes = useStyles();
   const getUsersStatus = useSelector((state) => state.users.getUsersStatus);
   useEffect(() => {
@@ -62,14 +68,19 @@ export default function HomePage({ getUsers, users, newUserAdded }) {
       outTime={user.outTime}
     />
   ));
-
+  // const ele = renderedUsersList[0];
+  // console.log({ ele });
+  // if (ele !== undefined) ele.style.display = 'none';
+  // renderedUsersList[0]?.style.display = 'none';
+  // search(renderedUsersList);
   return (
     <>
       {/* <DailyCount /> */}
+      <SearchBar />
       <ul className="userList">
         {renderedUsersList}
       </ul>
-      {newUserAdded
+      {rest?.location?.newUserAdded
         && <AddUserSuccessMsg />}
     </>
   );
@@ -77,5 +88,5 @@ export default function HomePage({ getUsers, users, newUserAdded }) {
 HomePage.propTypes = {
   getUsers: PropTypes.func.isRequired,
   users: PropTypes.instanceOf(Array).isRequired,
-  newUserAdded: PropTypes.bool.isRequired,
+  // rest: PropTypes.instanceOf(Object),
 };

@@ -5,6 +5,25 @@ import { connect } from 'react-redux';
 import { getUsers } from '../actions';
 import HomePage from '../components/HomePage';
 
+function outTimeUpdated(dateOutTime, today) {
+  return dateOutTime.getDate() === today.getDate()
+    && dateOutTime.getFullYear() === today.getFullYear();
+}
+
+function inTimeUpdated(dateInTime, today) {
+  return dateInTime.getDate() === today.getDate()
+    && dateInTime.getFullYear() === today.getFullYear();
+}
+function sortUsersByNameAsc(users) {
+  const sortedUsers = users.sort((a, b) => {
+    const aName = a.name.toLowerCase();
+    const bName = b.name.toLowerCase();
+    if (aName < bName) return -1;
+    if (aName > bName) return 1;
+    return 0;
+  });
+  return sortedUsers;
+}
 const mapDispatchToProps = (dispatch) => ({
   getUsers: () => dispatch(getUsers()),
 });
@@ -12,7 +31,8 @@ const mapStateToProps = (state) => {
   // eslint-disable-next-line prefer-destructuring
   const users = state.users.users;
   // let todayCount = 0;
-  const normalizedUsers = users.map((user) => {
+  const sortedUsersByNameAsc = sortUsersByNameAsc(users);
+  const usersToDisplay = sortedUsersByNameAsc.map((user) => {
     // console.log(user);
     const today = new Date();
     let inTime = null;
@@ -20,8 +40,7 @@ const mapStateToProps = (state) => {
     if (user.attendance.length > 0) {
       const dateInTime = new Date(user.attendance[0].inTime);
       inTime = null;
-      if (dateInTime.getDate() === today.getDate()
-       && dateInTime.getFullYear() === today.getFullYear()) {
+      if (inTimeUpdated(dateInTime, today)) {
         const hour = dateInTime.getHours();
         const min = dateInTime.getMinutes();
         inTime = `${hour}:${min}`;
@@ -30,8 +49,7 @@ const mapStateToProps = (state) => {
       }
       const dateOutTime = new Date(user.attendance[0].outTime);
       outTime = null;
-      if (dateOutTime.getDate() === today.getDate()
-       && dateOutTime.getFullYear() === today.getFullYear()) {
+      if (outTimeUpdated(dateOutTime, today)) {
         const hour = dateOutTime.getHours();
         const min = dateOutTime.getMinutes();
         outTime = `${hour}:${min}`;
@@ -47,11 +65,12 @@ const mapStateToProps = (state) => {
     };
   });
   return {
-    users: normalizedUsers,
+    users: usersToDisplay,
     newUserAdded: state.users.newUserAdded,
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
 // export default () => {
 //   const dispatch = useDispatch();
 //   function getUsers() {

@@ -36,11 +36,22 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 }));
+function sortUsersByNameAsc(users) {
+  const sortedUsers = users.sort((a, b) => {
+    const aName = a.name.toLowerCase();
+    const bName = b.name.toLowerCase();
+    if (aName < bName) return -1;
+    if (aName > bName) return 1;
+    return 0;
+  });
+  return sortedUsers;
+}
 export default function UsersList() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const getUsersStatus = useSelector((state) => state.users.getUsersStatus);
   const users = useSelector((state) => state.users.users);
+  const usersToDisplay = sortUsersByNameAsc(users);
   useEffect(() => {
     dispatch(getUsers());
   }, [getUsers]);
@@ -54,7 +65,7 @@ export default function UsersList() {
       </div>
     );
   }
-  const renderedUsersList = users.map((user) => {
+  const renderedUsersList = usersToDisplay.map((user) => {
     const dob = new Date(user.dob);
     const dobString = new Date(dob.getTime() - (dob.getTimezoneOffset() * 60000))
       .toISOString()

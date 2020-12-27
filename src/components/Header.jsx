@@ -151,7 +151,7 @@ export default function Header() {
             onClick={() => { window.location.href = '/'; }}
           >
             <img className={classes.image} src={BrandImg} alt="" />
-            <Typography style={{ display: 'inline' }} variant="h4">
+            <Typography style={{ display: 'inline-flex' }} variant="h6">
               BOLT GYM
             </Typography>
             <img className={classes.image} src={BrandImg} alt="" />

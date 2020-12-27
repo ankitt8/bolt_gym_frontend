@@ -6,25 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { getUsers } from '../actions';
 import UserDetailsCard from './UserDetailsCard';
 import SearchBar from './SearchBar';
-// function sortUsersByName() {
-//   // Declare variables
-//   const input = document.getElementById('myInput');
-//   const filter = input.value.toUpperCase();
-//   const ul = document.getElementById('userList');
-//   const li = ul.getElementsByTagName('li');
-//   const a = null;
-//   const txtValue = null;
-//   // Loop through all list items, and hide those who don't match the search query
-//   for (let i = 0; i < li.length; i++) {
-//     a = li[i].getElementsByTagName("a")[0];
-//     txtValue = a.textContent || a.innerText;
-//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//       li[i].style.display = "";
-//     } else {
-//       li[i].style.display = "none";
-//     }
-//   }
-// }
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',

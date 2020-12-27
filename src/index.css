@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: lightgoldenrodyellow; */
+  background-color: #F8F8F8;
 }
 
 code {
@@ -14,4 +14,8 @@ code {
 }
 .userList {
   padding: 0px;
+}
+
+.background {
+  background-color: #F8F8F8;	
 }

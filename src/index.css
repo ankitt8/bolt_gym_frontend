@@ -7,7 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #F8F8F8;
 }
-
+button {
+  outline: none;
+}
+a {
+  text-decoration: none;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

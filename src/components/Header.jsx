@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
@@ -145,8 +146,8 @@ export default function Header() {
           </IconButton>
           <div
             className={classes.alignBrand}
-            role="button"
-            tabIndex="0"
+            // role="button"
+            // tabIndex="0"
             onKeyPress={() => { window.location.href = '/'; }}
             onClick={() => { window.location.href = '/'; }}
           >

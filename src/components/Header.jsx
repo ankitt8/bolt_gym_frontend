@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
@@ -98,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
   },
   alignBrand: {
+    background: 'none',
+    border: 'none',
+    outline: 'none',
     display: 'flex',
     alignItems: 'center',
   },
@@ -144,10 +146,9 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <div
+          <button
+            type="button"
             className={classes.alignBrand}
-            // role="button"
-            // tabIndex="0"
             onKeyPress={() => { window.location.href = '/'; }}
             onClick={() => { window.location.href = '/'; }}
           >
@@ -156,7 +157,7 @@ export default function Header() {
               BOLT GYM
             </Typography>
             <img className={classes.image} src={BrandImg} alt="" />
-          </div>
+          </button>
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

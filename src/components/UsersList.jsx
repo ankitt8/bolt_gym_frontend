@@ -1,5 +1,5 @@
 /* eslint-disable dot-notation */
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -34,7 +34,7 @@ export default function UsersList() {
   const getUsersStatus = useSelector((state) => state.users.getUsersStatus);
   const users = useSelector((state) => state.users.users);
   const usersToDisplay = sortUsersByNameAsc(users);
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getUsers());
   }, [getUsers]);
   if (getUsersStatus.failed === true) {

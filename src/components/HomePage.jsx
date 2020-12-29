@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,7 +45,7 @@ export default function HomePage({ getUsers, users, ...rest }) {
   // console.log(rest);
   const classes = useStyles();
   const getUsersStatus = useSelector((state) => state.users.getUsersStatus);
-  useEffect(() => {
+  useLayoutEffect(() => {
     getUsers();
   }, [getUsers]);
   if (getUsersStatus.failed === true) {
